@@ -82,56 +82,43 @@
 </head>
 <body>
 
-  
+  <h1>Enter Your Info</h1>
 
   <div class="form-card">
-    
-  <div class="container">
-  <h1>🎓 Grade Checker</h1>
-  <label>Your Name:</label><br>
-  <input type="text" id="name" placeholder="Enter your name"><br>
+    <form id="userForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" required>
 
-  <label>Your Score:</label><br>
-  <input type="number" id="score" placeholder="Enter your score"><br>
+      <label for="age">Age</label>
+      <input type="number" id="age" required>
 
-  <button onclick="checkGrade()">Check Grade</button>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
-  <div id="result"></div>
-</div>
+  <div class="info-card" id="userInfo" style="display: none;">
+    <h3>User Info</h3>
+    <p><strong>Name:</strong> <span class="name" id="displayName"></span></p>
+    <p><strong>Age:</strong> <span id="displayAge"></span></p>
+  </div>
 
   <script>
-  function checkGrade() {
-    const name = document.getElementById('name').value;
-    const score = parseInt(document.getElementById('score').value);
-    const result = document.getElementById('result');
+    const form = document.getElementById('userForm');
+    const userInfoCard = document.getElementById('userInfo');
+    const displayName = document.getElementById('displayName');
+    const displayAge = document.getElementById('displayAge');
 
-    let grade = '';
-    let message = '';
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
 
-    if (score >= 90 && score <= 100) {
-      grade = 'A';
-      message = 'You passed 🎉 the test.';
-    } else if (score >= 80 && score <= 89) {
-      grade = 'B';
-      message = 'You passed 🎉 the test.';
-    } else if (score >= 70 && score <= 79) {
-      grade = 'C';
-      message = 'You passed 🎉 the test.';
-    } else if (score >= 60 && score <= 69) {
-      grade = 'D';
-      message = 'You passed 🎉 the test.';
-    } else if (score >= 50 && score <= 59) {
-      grade = 'E';
-      message = 'You passed 🎉 the test.';
-    } else {
-      grade = 'F';
-      message = 'You failed 😬 the test.';
-    }
+      displayName.textContent = name;
+      displayAge.textContent = age;
 
-    result.innerHTML = `Hello ${name}! Your grade is <strong>${grade}</strong>. ${message}`;
-    result.style.color = score < 50 ? "red" : "green";
-  }
-</script>
+      userInfoCard.style.display = 'block';
+    });
+  </script>
     
   </body>
 </html>
